@@ -2,7 +2,14 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 
-app.use(cors()) // options 해결하기 위한 cors 미들웨어 사용 
+  app.use(cors()) // options 해결하기 위한 cors 미들웨어 사용 
+  let allowCrossDomain = function(req, res, next) {
+     res.header('Access-Control-Allow-Origin', "*");
+     res.header('Access-Control-Allow-Headers', "*");
+     next();
+  }
+  app.use(allowCrossDomain); // cors 해결 위해 ..
+
 app.use(express.json())// body 바로 볼 수 있게 셋팅 
 
 app.get('/', (req,res)=>{
