@@ -1,19 +1,15 @@
-// url 넘어오는 형태
-// router.post('/user')
-// router.post('/user/signup')
-// router.post('/user/update')
 
+const models = require('../models/user')
 module.exports = {
-
-  user: (req, res) => { // 로그인시
-    let email = req.body.email;
-    let pw = req.body.pw;
-    let nickname = req.body.nickname;
-    console.log("email = ", email, " / pw = ", pw, " / nickname = ", nickname)
-    res.send(JSON.stringify("success post"))
+  login: (req, res, callback) => {
   },
 
   signup: (req, res) => { //회원가입시
+    console.log("controllers")
+    models.signup(req.body, (err, data) => {
+      if (err) { throw err }
+      console.log(data);
+    })
   },
 
   update: (req, res) => { //회원정보수정시
