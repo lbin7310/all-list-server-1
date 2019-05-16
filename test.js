@@ -17,8 +17,8 @@ let testObj = {
     "Content-Type": "application/json"
   }
 };
-
-fetch("http://localhost:9089/user", testObj)
+fetch("http://localhost:9089/login", testObj)
+// fetch("http://15.164.93.48:9089/user", testObj)
   .then(res => res.json())
   .then(json => console.log(json));
 //
