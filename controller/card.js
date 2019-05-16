@@ -4,10 +4,9 @@
 // router.post('/card/update')
 // router.delete('/card')
 
-
 module.exports = {
-    get : (req,res) => {},
-    create : (req,res) => {},
-    update : (req,res) => {},
-    delete : (req,res) => {}
+  get: (req, res) => {},
+  create: (req, res) => {},
+  update: (req, res) => {},
+  delete: (req, res) => {}
 }
