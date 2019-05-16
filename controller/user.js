@@ -11,9 +11,9 @@ module.exports = {
 
   signup: (req, res) => { //회원가입시
     console.log("signup controllers")
-    models.signup(req.body, (err, data) => {
+    models.signup(req.body, (err) => {
       if (err) { throw err }
-      console.log(data);
+      console.log("signup query success")
     })
   },
 
