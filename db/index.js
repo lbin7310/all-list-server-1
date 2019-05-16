@@ -4,7 +4,7 @@ module.exports = {
   dbConnection: mysql.createConnection({
     host: 'all-list.cvo8zxv2zp0l.ap-northeast-2.rds.amazonaws.com',
     user: 'root',
-    password: '123',
+    password: '122s3',
     database: 'all'
   })
 }
