@@ -7,7 +7,7 @@ module.exports = {
     let findUser = "select * from Users";
     db.dbConnection.query(findUser, (err, data) => {
       if (err) { callback(err, null) }
-      callback(null, data[0])
+      callback(null, data)
     })
   },
 

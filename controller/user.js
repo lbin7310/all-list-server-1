@@ -1,5 +1,7 @@
+// 라우터에서 user를 타고 들어와 응답을 받고 돌려주는 곳
 
-const models = require('../models/user')
+const models = require('../models/user') // mysql 데이터를 관리하는 곳
+
 module.exports = {
   login: (req, res) => {
     console.log("login controller");
