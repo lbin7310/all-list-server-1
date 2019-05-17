@@ -13,7 +13,9 @@ router.get('/', (req, res) => {
 const user = require('./controller/user');
 router.post('/login', user.login);
 router.post('/user', user.signup);
-router.put('/user', user.update);
+router.post('/user/email', user.search_email)
+router.post('/user/nick', user.search_nick)
+// router.put('/user', user.update);
 
 // board
 const board = require('./controller/board');

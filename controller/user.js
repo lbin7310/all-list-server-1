@@ -8,6 +8,7 @@ module.exports = {
     models.login(req.body, (err, data) => {
       if (err) { throw err }
       console.log(data);
+      res.end(JSON.stringify(data));
     })
   },
 
@@ -19,6 +20,23 @@ module.exports = {
     })
   },
 
-  update: (req, res) => { //회원정보수정시
+  search_email: (req, res) => { //email 중복검사
+    // 이메일 중복 검사하는 model 함수로 보낸다.
+    // req.body로 클라에서 받은 데이터 보내고  callback으로 data를 받는다
+    models.search_email(req.body, (err, data) => {
+      if (err) { throw err }
+      res.send(JSON.stringify(data)); // true나 false를 던져준다.
+    })
+  },
+
+  search_nick: (req, res) => { //nickname 중복검사
+    // req.body로 클라에서 받은 데이터 보내고  callback으로 data를 받는다
+    models.search_nick(req.body, (err, data) => {
+      if (err) { throw err }
+      res.send(JSON.stringify(data)); // true나 false를 던져준다.
+    })
   }
+
+  // update: (req, res) => { //회원정보수정시
+  // }
 }
