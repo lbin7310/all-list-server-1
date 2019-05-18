@@ -1,13 +1,14 @@
 const db = require('../db/index');
 
 module.exports = {
-  get: (useridx, callback) => {
+  get: (boardIdx, callback) => {
     // console.log("board get ", useridx);
-    let query = "SELECT * FROM `Board` where owner_idx = ?"
-    db.dbConnection.query(query, [useridx], (err, data) => {
+    let query = "SELECT * FROM `all`.Board inner join `all`.List on Board.origin_board_idx = List.board_idx " + 
+    "inner join `all`.Card on List.origin_list_idx = Card.list_idx where Board.origin_board_idx = ?"
+    db.dbConnection.query(query, [boardIdx], (err, data) => {
       if (err) { return callback(err, null) }
-      //console.log("board data", data);
-      return callback(data, null);
+      console.log("board data", data);
+      return callback(null, data);
     })
   },
 

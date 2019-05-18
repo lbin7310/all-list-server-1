@@ -18,12 +18,13 @@ module.exports = {
       // 클라이언트 로컬스토레이지에 담을 정보 생성
       console.log(data)
       // console.log(data[0].idx);
-      let find = "SELECT * FROM `all`.Users inner join `all`.Board on Users.idx = Board.owner_idx where Users.idx = ?"
+      let find = "SELECT * FROM Users inner join Board on Users.origin_user_idx = Board.owner_idx " +
+      "where Users.origin_user_idx = ?"
       // let find = "SELECT * FROM `all`.Users inner join `all`.Board on Users.idx = Board.owner_idx "+
       // "inner join `all`.List on Board.idx = List.Board_idx " +
       // "inner join `all`.Card on List.idx = Card.list_idx where Users.idx = ?"
 
-      db.dbConnection.query(find, data[0].idx, (err, allData) => {
+      db.dbConnection.query(find, data[0].origin_user_idx, (err, allData) => {
         if (err) { return callback(err, null) }
         console.log("짜잔 : ", allData);
         return callback(null, allData);

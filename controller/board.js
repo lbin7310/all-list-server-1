@@ -3,12 +3,12 @@ const models = require('../models/board');
 
 module.exports = {
   get: (req, res) => {
-    let QueryData = req.body.userinfo.userStorage.idx;
-    console.log("board get ", QueryData);
-    // models.get(QueryData, (err, data) => {
-    //   if (err) { return JSON.stringify("뭔가 잘못했어요") }
-    //   res.end(data);
-    // })
+    console.log("board get ", req.body);
+    //req.body === origin_board_idx 값
+    models.get(req.body, (err, data) => {
+      if (err) { return JSON.stringify("뭔가 잘못했어요") }
+      res.send(data);
+    })
     // console.log(paser)
     // let QueryData = req.body.userinfo.userStorage;
     // console.log("board get ", QueryData)
