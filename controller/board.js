@@ -5,10 +5,10 @@ module.exports = {
   get: (req, res) => {
     let QueryData = req.body.userinfo.userStorage.idx;
     console.log("board get ", QueryData);
-    models.get(QueryData, (err, data) => {
-      if (err) { return JSON.stringify("뭔가 잘못했어요") }
-      res.end(data);
-    })
+    // models.get(QueryData, (err, data) => {
+    //   if (err) { return JSON.stringify("뭔가 잘못했어요") }
+    //   res.end(data);
+    // })
     // console.log(paser)
     // let QueryData = req.body.userinfo.userStorage;
     // console.log("board get ", QueryData)

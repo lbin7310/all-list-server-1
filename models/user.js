@@ -1,13 +1,13 @@
 const db = require('../db/index');
-// db.dbConnection.connect();
 const crypto = require('crypto');
-const util = require('util');
+// const util = require('util');
 
 module.exports = {
   login: (data, callback) => {
     let email = data.email;
     let pw = crypto.createHash('sha512').update(data.pw).digest('base64').substring(0, 45);
     // 45번째 이상은 안들어가게 해놔서 substring으로 자름
+    
     let search = "SELECT * FROM `all`.Users where email = ? and password = ?";
     db.dbConnection.query(search, [email, pw], (err, data) => {
       if (err) { callback(err, null) }
@@ -16,13 +16,26 @@ module.exports = {
       // console.log(data);
       if (data.length === 0) { return callback(null, { success: false }) }; // 로그인 실패
       // 클라이언트 로컬스토레이지에 담을 정보 생성
-      let userinfo = {
-        idx: data[0].idx,
-        nickname: data[0].nickname,
-        email: data[0].email,
-        success: true
-      }
-      return callback(null, userinfo) // 로그인 성공
+      console.log(data)
+      // console.log(data[0].idx);
+      let find = "SELECT * FROM `all`.Users inner join `all`.Board on Users.idx = Board.owner_idx where Users.idx = ?"
+      // let find = "SELECT * FROM `all`.Users inner join `all`.Board on Users.idx = Board.owner_idx "+
+      // "inner join `all`.List on Board.idx = List.Board_idx " +
+      // "inner join `all`.Card on List.idx = Card.list_idx where Users.idx = ?"
+
+      db.dbConnection.query(find, data[0].idx, (err, allData) => {
+        if (err) { return callback(err, null) }
+        console.log("짜잔 : ", allData);
+        return callback(null, allData);
+      });
+
+    //   let userinfo = {
+    //     idx: data[0].idx,
+    //     nickname: data[0].nickname,
+    //     email: data[0].email,
+    //     success: true
+    //   }
+    //   return callback(null, userinfo) // 로그인 성공
     })
   },
 

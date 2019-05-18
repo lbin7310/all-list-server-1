@@ -18,9 +18,13 @@ module.exports = {
     // res.cookie("d", '1').send(JSON.stringify(true));
 
     models.login(req.body, (err, data) => {
-      if (err) { throw err }
+      if (err) { console.log(err) }
       console.log("login", data);
-      res.end(JSON.stringify(data));
+      let sendData = {
+        data: data,
+        success: true
+      }
+      res.end(JSON.stringify(sendData));
     })
   },
 
