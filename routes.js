@@ -15,7 +15,7 @@ router.post('/login', user.login);
 router.post('/user', user.signup);
 router.post('/user/email', user.search_email)
 router.post('/user/nick', user.search_nick)
-// router.put('/user', user.update);
+router.post('/user/jwt', user.update);
 
 // board
 const board = require('./controller/board');
