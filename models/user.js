@@ -1,5 +1,5 @@
 const db = require('../db/index');
-db.dbConnection.connect();
+// db.dbConnection.connect();
 const crypto = require('crypto');
 const util = require('util');
 
@@ -13,8 +13,8 @@ module.exports = {
       if (err) { callback(err, null) }
       // 맞는 user 정보가 없는 경우 [] mysql에서 빈배열이 반환되니까
       // 길이값이 0 일경우를 실패로 처리
+      // console.log(data);
       if (data.length === 0) { return callback(null, { success: false }) }; // 로그인 실패
-
       // 클라이언트 로컬스토레이지에 담을 정보 생성
       let userinfo = {
         idx: data[0].idx,
@@ -61,8 +61,7 @@ module.exports = {
       if (data.length === 0) { return callback(null, true) }; // 중복없을 때
       return callback(null, false); // 중복일 때
     })
-  },
-
-  update: (req, res) => { //회원정보수정시
   }
+  // update: (req, res) => { //회원정보수정시
+  // }
 }
