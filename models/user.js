@@ -1,28 +1,42 @@
 const db = require('../db/index');
-db.dbConnection.connect();
 const crypto = require('crypto');
-const util = require('util');
+// const util = require('util');
 
 module.exports = {
   login: (data, callback) => {
     let email = data.email;
     let pw = crypto.createHash('sha512').update(data.pw).digest('base64').substring(0, 45);
     // 45번째 이상은 안들어가게 해놔서 substring으로 자름
+    
     let search = "SELECT * FROM `all`.Users where email = ? and password = ?";
     db.dbConnection.query(search, [email, pw], (err, data) => {
       if (err) { callback(err, null) }
       // 맞는 user 정보가 없는 경우 [] mysql에서 빈배열이 반환되니까
       // 길이값이 0 일경우를 실패로 처리
+      // console.log(data);
       if (data.length === 0) { return callback(null, { success: false }) }; // 로그인 실패
-
       // 클라이언트 로컬스토레이지에 담을 정보 생성
-      let userinfo = {
-        idx: data[0].idx,
-        nickname: data[0].nickname,
-        email: data[0].email,
-        success: true
-      }
-      return callback(null, userinfo) // 로그인 성공
+      console.log(data)
+      // console.log(data[0].idx);
+      let find = "SELECT * FROM Users inner join Board on Users.origin_user_idx = Board.owner_idx " +
+      "where Users.origin_user_idx = ?"
+      // let find = "SELECT * FROM `all`.Users inner join `all`.Board on Users.idx = Board.owner_idx "+
+      // "inner join `all`.List on Board.idx = List.Board_idx " +
+      // "inner join `all`.Card on List.idx = Card.list_idx where Users.idx = ?"
+
+      db.dbConnection.query(find, data[0].origin_user_idx, (err, allData) => {
+        if (err) { return callback(err, null) }
+        console.log("짜잔 : ", allData);
+        return callback(null, allData);
+      });
+
+    //   let userinfo = {
+    //     idx: data[0].idx,
+    //     nickname: data[0].nickname,
+    //     email: data[0].email,
+    //     success: true
+    //   }
+    //   return callback(null, userinfo) // 로그인 성공
     })
   },
 
@@ -61,8 +75,7 @@ module.exports = {
       if (data.length === 0) { return callback(null, true) }; // 중복없을 때
       return callback(null, false); // 중복일 때
     })
-  },
-
-  update: (req, res) => { //회원정보수정시
   }
+  // update: (req, res) => { //회원정보수정시
+  // }
 }

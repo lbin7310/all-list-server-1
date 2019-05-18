@@ -1,5 +1,4 @@
 const router = require('express').Router();
-
 // req는 client에서 받는 것
 // res는 client로 줄 것
 
@@ -15,11 +14,11 @@ router.post('/login', user.login);
 router.post('/user', user.signup);
 router.post('/user/email', user.search_email)
 router.post('/user/nick', user.search_nick)
-router.post('/user/jwt', user.update);
+// router.put('/user', user.update);
 
 // board
 const board = require('./controller/board');
-router.get('/board', board.get);
+router.post('/board/get', board.get);
 router.post('/board', board.create);
 router.put('/board', board.update);
 router.delete('/board', board.delete);

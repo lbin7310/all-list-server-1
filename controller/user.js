@@ -1,10 +1,10 @@
 // 라우터에서 user를 타고 들어와 응답을 받고 돌려주는 곳
-
 const models = require('../models/user') // mysql 데이터를 관리하는 곳
-const jwt = require('jsonwebtoken');
+// const jwt = require('jsonwebtoken');
 
 module.exports = {
   login: (req, res) => {
+    console.log("user login");
     // console.log(req.body)
     // console.log("쿠키 : ", req.cookies)
     // console.log("login controller");
@@ -18,9 +18,13 @@ module.exports = {
     // res.cookie("d", '1').send(JSON.stringify(true));
 
     models.login(req.body, (err, data) => {
-      if (err) { throw err }
-      console.log(data);
-      res.end(JSON.stringify(data));
+      if (err) { console.log(err) }
+      console.log("login", data);
+      let sendData = {
+        data: data,
+        success: true
+      }
+      res.end(JSON.stringify(sendData));
     })
   },
 
@@ -48,10 +52,10 @@ module.exports = {
       if (err) { throw err }
       res.send(JSON.stringify(data)); // true나 false를 던져준다.
     })
-  },
-
-  update: (req, res) => { //회원정보수정시
-    console.log(222, req.body);
-    res.send(JSON.stringify("ok"));
   }
+
+  // update: (req, res) => { //회원정보수정시
+  //   console.log(222, req.body);
+  //   res.send(JSON.stringify("ok"));
+  // }
 }
