@@ -48,7 +48,7 @@ module.exports = {
     // ? 는 db.dbConnection.query안에 [email, pw, nickname]과 연동됨 핵좋음
     let insertUser = "INSERT INTO `all`.`Users` (`email`, `password`, `nickname`) VALUES (?,?,?)";
     db.dbConnection.query(insertUser, [email, pw, nickname], (err, data) => {
-      if (err) { return callback(err, null) };
+      if (err) { return callback(err, false) };
     })
     // console.log("email = ", email, " / pw = ", pw, " / nickname = ", nickname)
     return callback(null, true);

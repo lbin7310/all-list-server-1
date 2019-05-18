@@ -3,9 +3,9 @@ const models = require('../models/board');
 
 module.exports = {
   get: (req, res) => {
-    console.log("board get ", req.body);
+    console.log("board get ", req.body.boardIdx);
     //req.body === origin_board_idx 값
-    models.get(req.body, (err, data) => {
+    models.get(req.body.boardIdx, (err, data) => {
       if (err) { return JSON.stringify("뭔가 잘못했어요") }
       res.send(data);
     })
@@ -27,11 +27,11 @@ module.exports = {
       title: req.body.board.title,
       is_private: req.body.board.is_private,
       desc: req.body.board.desc,
-      idx: req.body.userinfo.idx
+      idx: req.body.board.idx
     }
     // console.log(QueryData);
     models.create(QueryData, (err, data) => {
-      if (err) { res.send("뭔가 잘못날렸어요") }
+      if (err) { res.send(JSON.stringify("뭔가 잘못날렸어요")) }
       res.end();
     })
   },

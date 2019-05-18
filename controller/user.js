@@ -30,8 +30,13 @@ module.exports = {
 
   signup: (req, res) => { //회원가입시
     console.log("signup controllers")
-    models.signup(req.body, (err) => {
-      if (err) { throw err }
+    models.signup(req.body, (err, data) => {
+      //data = true or false
+      if (err) {
+        console.log(err);
+        res.send({ success: data })
+      }
+      res.send({ success: data })
       console.log("signup query success")
     })
   },
