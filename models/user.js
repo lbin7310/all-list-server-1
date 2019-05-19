@@ -16,7 +16,7 @@ module.exports = {
       // console.log(data);
       if (data.length === 0) { return callback(null, { success: false }) }; // 로그인 실패
       // 클라이언트 로컬스토레이지에 담을 정보 생성
-      console.log(data)
+      console.log("로그인 실패 하면 이게 보이면 안됨")
       // console.log(data[0].idx);
       let find = "SELECT * FROM Users inner join Board on Users.origin_user_idx = Board.owner_idx " +
       "where Users.origin_user_idx = ?"
