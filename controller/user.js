@@ -19,12 +19,19 @@ module.exports = {
 
     models.login(req.body, (err, data) => {
       if (err) { console.log(err) }
-      console.log("login", data);
-      let sendData = {
-        data: data,
-        success: true
+      console.log("login");
+      if (data.length !== undefined) { //로그인성공시
+        let sendData = {
+          data: data,
+          success: true
+        }
+        res.end(JSON.stringify(sendData));
+      } else { // 로그인 실패시
+        res.end(JSON.stringify({
+          data: null,
+          success: false
+        }));
       }
-      res.end(JSON.stringify(sendData));
     })
   },
 
