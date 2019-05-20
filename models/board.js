@@ -34,18 +34,21 @@ module.exports = {
       db.dbConnection.query(query, [board_title, origin_board_idx], (err, data) => {
         if (err) { throw err }
         console.log("title만 수정할 때", data);
+        return callback(null, true);
       });
     } else if (!board_title) { // board_desc만 수정 !board_title 
       let query = "UPDATE `all`.`Board` SET `board_desc` = ? WHERE (`origin_board_idx` = ?)";
       db.dbConnection.query(query, [board_desc, origin_board_idx], (err, data) => {
         if (err) { throw err }
         console.log("desc만 수정할 때", data);
+        return callback(null, true);
       });
     } else { // board_title, board_desc 수정  all
       let query = "UPDATE `all`.`Board` SET `board_title` = ?, `board_desc` = ? WHERE (`origin_board_idx` = ?)";
       db.dbConnection.query(query, [board_title, board_desc, origin_board_idx], (err, data) => {
-        if (err) { throw err }
+        if (err) { throw err };
         console.log("전부 수정할 때", data);
+        return callback(null, true);
       });
     }
   },
