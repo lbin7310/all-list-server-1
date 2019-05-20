@@ -6,9 +6,9 @@
 //post
 let token;
 let testText = {
-  email: "yms0214@dreamwiz.com",
-  pw: "alstn007",
-  nickname: "all"
+  email: "noh@gmail.com",
+  pw: "noh",
+  nickname: "noh"
 };
 
 let testObj = {

@@ -7,7 +7,6 @@ module.exports = {
     let email = data.email;
     let pw = crypto.createHash('sha512').update(data.pw).digest('base64').substring(0, 45);
     // 45번째 이상은 안들어가게 해놔서 substring으로 자름
-    
     let search = "SELECT * FROM `all`.Users where email = ? and password = ?";
     db.dbConnection.query(search, [email, pw], (err, data) => {
       if (err) { callback(err, null) }
