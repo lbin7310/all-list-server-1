@@ -12,12 +12,9 @@ let testText = {
 };
 
 let testObj = {
-  method: "POST",
+  method: "DELETE",
   body: JSON.stringify({
-    origin_list_idx: 7,
-    origin_user_idx: 1,
-    card_title: "hi",
-    card_desc: "re_hi"
+    origin_card_idx: 12
   }),
   headers: {
     "Content-Type": "application/json"
