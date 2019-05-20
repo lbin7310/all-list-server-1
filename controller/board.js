@@ -3,9 +3,9 @@ const models = require('../models/board');
 
 module.exports = {
   get: (req, res) => {
-    console.log("board get ", req.body.boardIdx);
+    console.log("board get ", req.body.origin_board_idx);
     //req.body === origin_board_idx 값
-    models.get(req.body.boardIdx, (err, data) => {
+    models.get(req.body.origin_board_idx, (err, data) => {
       if (err) { return JSON.stringify("뭔가 잘못했어요") }
       res.send(data);
     })
@@ -18,10 +18,10 @@ module.exports = {
     // console.log(iconv.decode(req.body.title, 'EUC-KR').toString());
     // console.log(req.body);
     let QueryData = {
-      title: req.body.board.title,
+      title: req.body.board.board_title,
       is_private: req.body.board.is_private,
-      desc: req.body.board.desc,
-      idx: req.body.board.idx
+      desc: req.body.board.board_desc,
+      idx: req.body.board.origin_user_idx
     }
     // console.log(QueryData);
     models.create(QueryData, (err, data) => {
