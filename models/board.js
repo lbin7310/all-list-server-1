@@ -3,8 +3,10 @@ const db = require('../db/index');
 module.exports = {
   get: (origin_board_idx, callback) => {
     console.log("board get ", origin_board_idx);
-    let query = "SELECT * FROM `all`.Board inner join `all`.List on Board.origin_board_idx = List.board_idx " +
-    "inner join `all`.Card on List.origin_list_idx = Card.list_idx where Board.origin_board_idx = ?"
+    let query = "select * from `all`.Board as b left join `all`.List as l " +
+                "on b.origin_board_idx = l.board_idx " +
+                "left join `all`.Card as c on l.origin_list_idx = c.list_idx " +
+                "where b.origin_board_idx=?"
     db.dbConnection.query(query, [origin_board_idx], (err, data) => {
       if (err) { return callback(err, null) }
       console.log("board data", data);
