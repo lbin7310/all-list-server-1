@@ -15,12 +15,6 @@ module.exports = {
   },
 
   create: (req, res) => { // 보드 만드는 sql로 넘겨주기
-    /** mysql로 넘겨줄 정보형태
-     * title
-     * owner_idx
-     * is_private
-     * desc
-     */
     // console.log(iconv.decode(req.body.title, 'EUC-KR').toString());
     // console.log(req.body);
     let QueryData = {
@@ -45,6 +39,13 @@ module.exports = {
     })
   },
 
-  delete: (req, res) => {}
+  delete: (req, res) => {
+    console.log("보드 삭제");
+    // console.log(req.body);
+    models.delete(req.body, (err, data) => {
+      if (err) { throw err };
+      res.send(data);
+    })
+  }
 
 }

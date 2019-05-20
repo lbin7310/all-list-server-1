@@ -3,7 +3,7 @@ const db = require('../db/index');
 module.exports = {
   get: (boardIdx, callback) => {
     console.log("board get ", boardIdx);
-    let query = "SELECT * FROM `all`.Board inner join `all`.List on Board.origin_board_idx = List.board_idx " + 
+    let query = "SELECT * FROM `all`.Board inner join `all`.List on Board.origin_board_idx = List.board_idx " +
     "inner join `all`.Card on List.origin_list_idx = Card.list_idx where Board.origin_board_idx = ?"
     db.dbConnection.query(query, [boardIdx], (err, data) => {
       if (err) { return callback(err, null) }
@@ -54,7 +54,14 @@ module.exports = {
   },
 
   delete: (data, callback) => {
-
+    let origin_board_idx = data.origin_board_idx;
+    console.log("idx = ", origin_board_idx)
+    let query = "delete b,l,c from `all`.Board as b inner join `all`.List as l on b.origin_board_idx = l.board_idx " +
+                "inner join `all`.Card as c on l.origin_list_idx = c.list_idx where b.origin_board_idx=?";
+    db.dbConnection.query(query, [origin_board_idx], (err, data) => {
+      if (err) { throw err };
+      return callback(null, true);
+    })
   }
 
 }
