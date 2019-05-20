@@ -12,15 +12,19 @@ let testText = {
 };
 
 let testObj = {
-  method: "POST",
-  body: JSON.stringify(testText),
+  method: "PUT",
+  body: JSON.stringify({
+    origin_board_idx : 1,
+    board_title: "first",
+    board_desc: null
+  }),
   headers: {
     "Content-Type": "application/json"
   }
 };
 // "http://15.164.93.48:9089/login"
 
-fetch("http://localhost:9089/login", testObj)
+fetch("http://localhost:9089/board", testObj)
   .then(res => res.json())
   .then(json => console.log(json));
 
