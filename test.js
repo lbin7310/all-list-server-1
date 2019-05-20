@@ -6,23 +6,21 @@
 //post
 let token;
 let testText = {
-  email: "board@gmail.com",
-  pw: "board",
-  nickname: "board"
+  email: "noh@gmail.com",
+  pw: "noh",
+  nickname: "noh"
 };
 
 let testObj = {
-  method: "DELETE",
-  body: JSON.stringify({
-    origin_board_idx : 8
-  }),
+  method: "POST",
+  body: JSON.stringify(testText),
   headers: {
     "Content-Type": "application/json"
   }
 };
 // "http://15.164.93.48:9089/login"
 
-fetch("http://localhost:9089/board", testObj)
+fetch("http://localhost:9089/login", testObj)
   .then(res => res.json())
   .then(json => console.log(json));
 

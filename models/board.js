@@ -54,6 +54,7 @@ module.exports = {
   },
 
   delete: (data, callback) => {
+    // boardidx를 공유하고 있는 list와 card 전부를 삭제 
     let origin_board_idx = data.origin_board_idx;
     console.log("idx = ", origin_board_idx)
     let query = "delete b,l,c from `all`.Board as b inner join `all`.List as l on b.origin_board_idx = l.board_idx " +
