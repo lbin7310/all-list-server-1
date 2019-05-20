@@ -7,22 +7,20 @@
 let token;
 let testText = {
   email: "noh@gmail.com",
-  pw: "noh",
+  pw: "nohs",
   nickname: "noh"
 };
 
 let testObj = {
   method: "POST",
-  body: JSON.stringify({
-    origin_board_idx: 5
-  }),
+  body: JSON.stringify(testText),
   headers: {
     "Content-Type": "application/json"
   }
 };
 // "http://15.164.93.48:9089/login"
 
-fetch("http://localhost:9089/board/get", testObj)
+fetch("http://localhost:9089/login", testObj)
   .then(res => res.json())
   .then(json => console.log(json));
 

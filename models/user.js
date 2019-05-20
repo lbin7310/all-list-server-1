@@ -12,31 +12,9 @@ module.exports = {
       if (err) { callback(err, null) }
       // 맞는 user 정보가 없는 경우 [] mysql에서 빈배열이 반환되니까
       // 길이값이 0 일경우를 실패로 처리
-      let empty_other_data = data; // 로그인은 성공했으나 보드를 생성하지 않은 경우 보내줄 데이터 
-      if (data.length === 0) { return callback(null, { success: false }) }; // 로그인 실패
+      if (data.length === 0) { return callback(null, false)}; // 로그인 실패
       // 클라이언트 로컬스토레이지에 담을 정보 생성
-      console.log("로그인 실패 하면 이게 보이면 안됨")
-      // console.log(data[0].idx);
-      let find = "SELECT * FROM Users inner join Board on Users.origin_user_idx = Board.owner_idx " +
-      "where Users.origin_user_idx = ?"
-      // let find = "SELECT * FROM `all`.Users inner join `all`.Board on Users.idx = Board.owner_idx "+
-      // "inner join `all`.List on Board.idx = List.Board_idx " +
-      // "inner join `all`.Card on List.idx = Card.list_idx where Users.idx = ?"
-
-      db.dbConnection.query(find, data[0].origin_user_idx, (err, allData) => {
-        if (err) { return callback(err, null) }
-        if (allData.length === 0) { return callback(null, empty_other_data) } // 생성한 보드가 없는 경우
-        console.log("짜잔 : ", allData);
-        return callback(null, allData);
-      });
-
-    //   let userinfo = {
-    //     idx: data[0].idx,
-    //     nickname: data[0].nickname,
-    //     email: data[0].email,
-    //     success: true
-    //   }
-    //   return callback(null, userinfo) // 로그인 성공
+      return callback(null, data) // 로그인성공
     })
   },
 

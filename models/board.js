@@ -1,12 +1,27 @@
 const db = require('../db/index');
 
 module.exports = {
+
+  lender: (origin_user_idx, callback) => {
+    let query = "SELECT * FROM Users inner join Board on Users.origin_user_idx = Board.owner_idx " +
+    "where Users.origin_user_idx = ?"
+    // let find = "SELECT * FROM `all`.Users inner join `all`.Board on Users.idx = Board.owner_idx "+
+    // "inner join `all`.List on Board.idx = List.Board_idx " +
+    // "inner join `all`.Card on List.idx = Card.list_idx where Users.idx = ?"
+    db.dbConnection.query(query, [origin_user_idx], (err, allData) => {
+      if (err) { return callback(err, null) }
+      if (allData.length === 0) { return callback(null, empty_other_data) } // 생성한 보드가 없는 경우
+      console.log("짜잔 : ", allData);
+      return callback(null, allData);
+    })
+  },
+
   get: (origin_board_idx, callback) => {
     console.log("board get ", origin_board_idx);
     let query = "select * from `all`.Board as b left join `all`.List as l " +
                 "on b.origin_board_idx = l.board_idx " +
                 "left join `all`.Card as c on l.origin_list_idx = c.list_idx " +
-                "where b.origin_board_idx=?"
+                "where b.origin_board_idx=?";
     db.dbConnection.query(query, [origin_board_idx], (err, data) => {
       if (err) { return callback(err, null) }
       console.log("board data", data);
