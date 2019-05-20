@@ -12,10 +12,9 @@ let testText = {
 };
 
 let testObj = {
-  method: "PUT",
+  method: "DELETE",
   body: JSON.stringify({
-    origin_list_idx : 1,
-    list_title: "sssss"
+    origin_list_idx: 7
   }),
   headers: {
     "Content-Type": "application/json"
