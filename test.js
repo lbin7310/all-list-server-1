@@ -14,7 +14,7 @@ let testText = {
 let testObj = {
   method: "POST",
   body: JSON.stringify({
-    origin_board_idx: 4
+    origin_board_idx: 5
   }),
   headers: {
     "Content-Type": "application/json"
