@@ -31,7 +31,6 @@ router.delete('/list', list.delete);
 
 // card
 const card = require('./controller/card');
-router.get('/card', card.get);
 router.post('/card', card.create);
 router.put('/card', card.update);
 router.delete('/card', card.delete);

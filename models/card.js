@@ -1,25 +1,14 @@
 const db = require('../db/index');
 
 module.exports = {
-  get: (useridx, callback) => {
-    // console.log("board get ", useridx);
-    let query = "SELECT * FROM `Board` where owner_idx = ?"
-    db.dbConnection.query(query, [useridx], (err, data) => {
-      if (err) { return callback(err, null) }
-      //console.log("board data", data);
-      return callback(data, null);
-    })
-  },
 
   create: (data, callback) => {
-    console.log("create data ", data);
-    let { title, idx, is_private, desc } = data;
-    // console.log("board create mysql", idx);
-    let query = "INSERT INTO `Board` (`title`, `owner_idx`, `is_private`, `desc`) VALUES (?,?,?,?);"
-    db.dbConnection.query(query, [title, idx, is_private, desc], (err, data) => {
-      if (err) { return callback(err, null) }
-      return callback(true, null) //error 안뜨면 성공이니 트루 전달.
-    //   return data
+    let { origin_list_idx, origin_user_idx, card_title, card_desc } = data;
+    // console.log(origin_list_idx, origin_user_idx, card_title, card_desc);
+    let query = "INSERT INTO `all`.`Card` (`card_title`, `card_desc`, `list_idx`, `owner_idx`) VALUES (?,?,?,?)";
+    db.dbConnection.query(query, [card_title, card_desc, origin_list_idx, origin_user_idx], (err, data) => {
+      if (err) { return console.log(err) };
+      return callback(null, true);
     })
   },
 
