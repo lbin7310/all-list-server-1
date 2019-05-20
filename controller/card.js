@@ -1,12 +1,13 @@
-// card 넘어오기 전 형태
-// router.get('/card')
-// router.post('/card/create')
-// router.post('/card/update')
-// router.delete('/card')
+const models = require('../models/card');
 
 module.exports = {
-  get: (req, res) => {},
-  create: (req, res) => {},
+  create: (req, res) => {
+    // console.log("card 생성 컨트롤러", req.body);
+    models.create(req.body, (err, data) => {
+      if (err) { throw err };
+      res.send(true);
+    })
+  },
   update: (req, res) => {},
   delete: (req, res) => {}
 }

@@ -12,9 +12,12 @@ let testText = {
 };
 
 let testObj = {
-  method: "DELETE",
+  method: "POST",
   body: JSON.stringify({
-    origin_list_idx: 7
+    origin_list_idx: 7,
+    origin_user_idx: 1,
+    card_title: "hi",
+    card_desc: "re_hi"
   }),
   headers: {
     "Content-Type": "application/json"
@@ -22,7 +25,7 @@ let testObj = {
 };
 // "http://15.164.93.48:9089/login"
 
-fetch("http://localhost:9089/list", testObj)
+fetch("http://localhost:9089/card", testObj)
   .then(res => res.json())
   .then(json => console.log(json));
 
