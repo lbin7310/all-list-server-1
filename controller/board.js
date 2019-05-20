@@ -2,6 +2,11 @@ const models = require('../models/board');
 // const iconv = require('iconv-lite'); // 클라에서 넘겨준 한글 깨짐 현상을 처리하기
 
 module.exports = {
+
+  lender: (req, res) => { // 로그인시 모든 것을 보내는 컨트롤러 
+    
+  },
+
   get: (req, res) => {
     console.log("board get ", req.body.origin_board_idx);
     //req.body === origin_board_idx 값
@@ -47,5 +52,4 @@ module.exports = {
       res.send(data);
     })
   }
-
 }

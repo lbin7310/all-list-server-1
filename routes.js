@@ -19,6 +19,7 @@ router.post('/user/nick', user.search_nick)
 // board
 const board = require('./controller/board');
 router.post('/board/get', board.get);
+router.post('/board/lender', board.lender);
 router.post('/board', board.create);
 router.put('/board', board.update);
 router.delete('/board', board.delete);
