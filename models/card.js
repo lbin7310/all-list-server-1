@@ -29,7 +29,7 @@ module.exports = {
         if (err) { return console.log(err) };
         return callback(null, true);
       })
-    } else {
+    } else { // 둘다 수정할 경우
       // console.log("카드 모두 수정할 경우");
       let query = "UPDATE `all`.`Card` SET `card_title` = ?, `card_desc` = ? WHERE (`origin_card_idx` = ?)";
       db.dbConnection.query(query, [card_title, card_desc, origin_card_idx], (err, data) => {
@@ -37,11 +37,15 @@ module.exports = {
         return callback(null, true);
       })
     }
-    // 둘다 수정할 경우
   },
 
-  delete: (data, callback) => {
-
+  delete: (origin_card_idx, callback) => {
+    console.log("card 삭제 models");
+    let query = "DELETE FROM `all`.`Card` WHERE (`origin_card_idx` = ?)";
+    db.dbConnection.query(query, [origin_card_idx], (err, data) => {
+      if (err) { return console.log(err) };
+      return callback(null, true);
+    })
   }
 
 }

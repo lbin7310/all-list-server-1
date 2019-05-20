@@ -12,11 +12,9 @@ let testText = {
 };
 
 let testObj = {
-  method: "PUT",
+  method: "DELETE",
   body: JSON.stringify({
-    origin_card_idx: 11,
-    card_title: "1323",
-    card_desc: "1112"
+    origin_card_idx: 12
   }),
   headers: {
     "Content-Type": "application/json"

@@ -15,5 +15,11 @@ module.exports = {
       res.send(data);
     })
   },
-  delete: (req, res) => {}
+  delete: (req, res) => {
+    console.log("card 삭제 컨트롤러", req.body.origin_card_idx);
+    models.delete(req.body.origin_card_idx, (err, data) => {
+      if (err) { throw err };
+      res.send(data);
+    })
+  }
 }
