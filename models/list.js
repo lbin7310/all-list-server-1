@@ -2,29 +2,20 @@ const db = require('../db/index');
 
 module.exports = {
   get: (useridx, callback) => {
-    // console.log("board get ", useridx);
-    let query = "SELECT * FROM `Board` where owner_idx = ?"
-    db.dbConnection.query(query, [useridx], (err, data) => {
-      if (err) { return callback(err, null) }
-      //console.log("board data", data);
-      return callback(data, null);
-    })
   },
 
   create: (data, callback) => {
-    console.log("create data ", data);
-    let { title, idx, is_private, desc } = data;
-    // console.log("board create mysql", idx);
-    let query = "INSERT INTO `Board` (`title`, `owner_idx`, `is_private`, `desc`) VALUES (?,?,?,?);"
-    db.dbConnection.query(query, [title, idx, is_private, desc], (err, data) => {
-      if (err) { return callback(err, null) }
-      return callback(true, null) //error 안뜨면 성공이니 트루 전달.
-    //   return data
-    })
   },
 
   update: (data, callback) => {
-
+    // 사용자가 리스트 타이틀을 수정할 때
+    const {origin_list_idx , list_title} = data;
+    // console.log("origin_list_idx = ", list_title);
+    let query = "UPDATE `all`.`List` SET `list_title` = ? WHERE (`origin_list_idx` = ?)"
+    db.dbConnection.query(query, [list_title , origin_list_idx], (err, data) => {
+      if (err) { console.log(err) };
+      callback(null, true);
+    })
   },
 
   delete: (data, callback) => {
