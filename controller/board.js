@@ -39,20 +39,10 @@ module.exports = {
   update: (req, res) => { // 보드 수정
     // 클라쪽에서 받아야할 데이터
     console.log("보드 수정 콘드롤러")
-    if (req.body.board_desc) { // desc도 수정할경우
-      console.log("desc not null")
-      models.update(req.body, (err, data) => {
-        if (err) { throw err };
-        console.log(data);
-      })
-    } else { // title 만 수정할 경우
-      console.log("desc null")
-      models.update(req.body, (err, data) => {
-        if (err) { throw err }
-        console.log(data);
-      })
-    }
-    // console.log("보드 수정 콘트롤러 와 값 = ", req.body);
+    models.update(req.body, (err, data) => {
+      if (err) { throw err };
+      res.send(data)
+    })
   },
 
   delete: (req, res) => {}
