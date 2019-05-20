@@ -25,6 +25,7 @@ router.delete('/board', board.delete);
 
 // list
 const list = require('./controller/list');
+router.post('/list', list.create);
 router.put('/list', list.update);
 router.delete('/list', list.delete);
 
