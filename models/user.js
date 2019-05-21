@@ -33,6 +33,7 @@ module.exports = {
   },
 
   search_email: (data, callback) => {
+    // 이메일 중복 검사체크
     let email = data.email;
     // ? 는 db.dbConnection.query안에 [emmail]과 연동됨 핵좋음
     let searchEm = "SELECT `email` FROM `all`.`Users` where email = ?"
@@ -45,6 +46,7 @@ module.exports = {
   },
 
   search_nick: (data, callback) => {
+    // 닉네임 중복체크
     let nickname = data.nickname; // 닉네임을 변수에 삽입
     // 쿼리문 작성
     let searchNick = "SELECT `email` FROM `all`.`Users` where nickname = ?"

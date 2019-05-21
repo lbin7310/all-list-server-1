@@ -24,14 +24,6 @@ module.exports = {
     // console.log("board get ", QueryData)
   },
 
-  userboard: (req, res) => {
-    console.log(req.body)
-    models.userboard(req.body, (err, data) => {
-      if (err) { res.send(err) };
-      console.log(data);
-    })
-  },
-
   create: (req, res) => { // 보드 만드는 sql로 넘겨주기
     // console.log(iconv.decode(req.body.title, 'EUC-KR').toString());
     // console.log(req.body);

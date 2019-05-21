@@ -19,6 +19,7 @@ module.exports = {
   },
 
   get: (origin_board_idx, callback) => {
+    // 보드 그리고 보드와 연결된 리스트 , 카드들을 다 가져옴
     console.log("board get ", origin_board_idx);
     let query = "select * from `all`.Board as b left join `all`.List as l " +
                 "on b.origin_board_idx = l.board_idx " +
@@ -31,17 +32,8 @@ module.exports = {
     })
   },
 
-  userboard: (data, callback) => {
-    console.log("userboard = ", data);
-    let {origin_board_idx, origin_user_idx} = data
-    let query = "INSERT INTO `all`.`User_Board` (`user_idx`, `board_idx`) VALUES (?, ?)";
-    db.dbConnection.query(query, [origin_user_idx, origin_board_idx], (err, data) => {
-      if (err) { return callback(err, null) };
-      console.log(data);
-    })
-  },
-
   create: (data, callback) => {
+    // 보드를 생성하는 곳
     console.log("board create data ", data);
     let { board_title, origin_user_idx, is_private, desc } = data;
     // console.log("board create mysql", idx);
@@ -57,6 +49,7 @@ module.exports = {
   },
 
   update: (data, callback) => {
+    // 보드를 수정하는 곳
     let { origin_board_idx, board_title, board_desc } = data;
     if (!board_desc) { // board_title만 수정 할 때 !board_desc
       let query = "UPDATE `all`.`Board` SET `board_title` = ? WHERE (`origin_board_idx` = ?)";
