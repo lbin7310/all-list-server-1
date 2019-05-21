@@ -22,6 +22,19 @@ module.exports = {
 
   search: (req, res) => {
     //닉네임으로 추가할 팀원을 찾을 때
+    models.search(JSON.parse(req.headers.info), (err, data) => {
+      if (err) { res.send(err) };
+      res.send(JSON.stringify(data));
+    })
+  },
+
+  delete: (req, res) => {
+    //닉네임으로 추가할 팀원을 찾을 때
+    // console.log(req.body)
+    models.delete(req.body, (err, data) => {
+      if (err) { res.send(err) };
+      res.send(data);
+    })
   }
 
 }
