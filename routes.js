@@ -21,6 +21,7 @@ const board = require('./controller/board');
 router.get('/board', board.get);
 router.get('/lender', board.lender);
 router.post('/board', board.create);
+router.post('/userboard', board.userboard);
 router.put('/board', board.update);
 router.delete('/board', board.delete);
 

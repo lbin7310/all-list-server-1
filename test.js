@@ -6,14 +6,16 @@
 //post
 let token;
 let testText = {
-  email: "noh@gmail.com",
-  pw: "nohs",
-  nickname: "noh"
+  // email: "noh@gmail.com",
+  // pw: "noh",
+  // nickname: "noh"
+  origin_user_idx: 1,
+  origin_board_idx: 5
 };
 
 let testObj = {
-  method: "GET",
-  // body: JSON.stringify(testText),
+  method: "POST",
+  body: JSON.stringify(testText),
   headers: {
     "Content-Type": "application/json"
   }
@@ -24,11 +26,11 @@ var myInit = {
   headers: {
     "Content-Type": "application/json",
     "info": JSON.stringify({
-      origin_board_idx: 1
+      origin_user_idx: 23
     })
   }
 }
-fetch("http://localhost:9089/lender", myInit)
+fetch("http://localhost:9089/userboard", testObj)
   .then(res => res.json())
   .then(json => console.log(json));
 
