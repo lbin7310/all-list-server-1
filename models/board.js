@@ -7,9 +7,8 @@ module.exports = {
     console.log("lender models", origin_user_idx)
     let query = "select * from `all`.Board as b inner join `all`.User_Board as ub " +
                 "on ub.board_idx = b.origin_board_idx where ub.user_idx = ?"
-    // let find = "SELECT * FROM `all`.Users inner join `all`.Board on Users.idx = Board.owner_idx "+
-    // "inner join `all`.List on Board.idx = List.Board_idx " +
-    // "inner join `all`.Card on List.idx = Card.list_idx where Users.idx = ?"
+                // select * from `all`.Board as b inner join `all`.User_Board as ub 
+                // on ub.board_idx = b.origin_board_idx where ub.user_idx = 23
     db.dbConnection.query(query, [origin_user_idx], (err, allData) => {
       if (err) { return callback(err, null) }
       if (allData.length === 0) { return callback(null, null) } // 생성한 보드가 없는 경우

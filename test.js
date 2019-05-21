@@ -14,10 +14,15 @@ let testText = {
 };
 
 let testObj = {
-  method: "POST",
-  body: JSON.stringify(testText),
+  method: "GET",
+  // body: JSON.stringify({
+  //   origin_board_idx : 4
+  // }),
   headers: {
-    "Content-Type": "application/json"
+    "Content-Type": "application/json",
+    "info": JSON.stringify({
+      origin_board_idx : 4
+    })
   }
 };
 // "http://15.164.93.48:9089/login"
@@ -31,7 +36,7 @@ var myInit = {
     })
   }
 }
-fetch("http://localhost:9089/user_board", testObj)
+fetch("http://localhost:9089/user_board/find", testObj)
   .then(res => res.json())
   .then(json => console.log(json));
 

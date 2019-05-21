@@ -7,8 +7,21 @@ module.exports = {
     console.log(req.body);
     models.create(req.body, (err, data) => {
       if (err) { res.send(err) };
-      console.log(data);
+      res.send(true);
     })
+  },
+
+  find: (req, res) => {
+    //팀보드에 속해있는 사용자 목록 찾을 때
+    // console.log(JSON.parse(req.headers.info))
+    models.find(JSON.parse(req.headers.info), (err, data) => {
+      if (err) { res.send(err) };
+      res.send(JSON.stringify(data));
+    })
+  },
+
+  search: (req, res) => {
+    //닉네임으로 추가할 팀원을 찾을 때
   }
 
 }
