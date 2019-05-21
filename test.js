@@ -12,15 +12,23 @@ let testText = {
 };
 
 let testObj = {
-  method: "POST",
-  body: JSON.stringify(testText),
+  method: "GET",
+  // body: JSON.stringify(testText),
   headers: {
     "Content-Type": "application/json"
   }
 };
 // "http://15.164.93.48:9089/login"
-
-fetch("http://localhost:9089/login", testObj)
+var myInit = {
+  method: 'GET',
+  headers: {
+    "Content-Type": "application/json",
+    "info": JSON.stringify({
+      origin_board_idx: 1
+    })
+  }
+}
+fetch("http://localhost:9089/lender", myInit)
   .then(res => res.json())
   .then(json => console.log(json));
 
