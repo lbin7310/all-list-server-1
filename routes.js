@@ -21,7 +21,6 @@ const board = require('./controller/board');
 router.get('/board', board.get);
 router.get('/lender', board.lender);
 router.post('/board', board.create);
-router.post('/userboard', board.userboard);
 router.put('/board', board.update);
 router.delete('/board', board.delete);
 
@@ -38,5 +37,6 @@ router.put('/card', card.update);
 router.delete('/card', card.delete);
 
 //user_board
-
+const user_board = require('./controller/user_board');
+router.post('/user_board', user_board.create);
 module.exports = router;

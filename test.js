@@ -9,8 +9,8 @@ let testText = {
   // email: "noh@gmail.com",
   // pw: "noh",
   // nickname: "noh"
-  origin_user_idx: 1,
-  origin_board_idx: 5
+  origin_user_idx: 20,
+  origin_board_idx: 20
 };
 
 let testObj = {
@@ -26,11 +26,12 @@ var myInit = {
   headers: {
     "Content-Type": "application/json",
     "info": JSON.stringify({
-      origin_user_idx: 23
+      email: "noh@gmail.com",
+      pw: "noh"
     })
   }
 }
-fetch("http://localhost:9089/userboard", testObj)
+fetch("http://localhost:9089/user_board", testObj)
   .then(res => res.json())
   .then(json => console.log(json));
 
