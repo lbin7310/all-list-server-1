@@ -4,8 +4,11 @@ const models = require('../models/board');
 module.exports = {
 
   lender: (req, res) => { // 로그인시 모든 것을 보내는 컨트롤러
-    console.log("render");
-    console.log(req.headers);
+    console.log("lender 컴포넌트");
+    models.lender(JSON.parse(req.headers.info).origin_user_idx, (err, data) => {
+      if (err) { res.send(err) };
+      res.send(JSON.stringify(data));
+    })
   },
 
   get: (req, res) => {
@@ -19,6 +22,14 @@ module.exports = {
     // console.log(paser)
     // let QueryData = req.body.userinfo.userStorage;
     // console.log("board get ", QueryData)
+  },
+
+  userboard: (req, res) => {
+    console.log(req.body)
+    models.userboard(req.body, (err, data) => {
+      if (err) { res.send(err) };
+      console.log(data);
+    })
   },
 
   create: (req, res) => { // 보드 만드는 sql로 넘겨주기
