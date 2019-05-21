@@ -12,7 +12,7 @@ module.exports = {
     db.dbConnection.query(query, [origin_user_idx], (err, allData) => {
       if (err) { return callback(err, null) }
       if (allData.length === 0) { return callback(null, null) } // 생성한 보드가 없는 경우
-      console.log("짜잔 : ", allData);
+      console.log("lender : ", allData);
       return callback(null, allData);
     })
   },
@@ -42,8 +42,13 @@ module.exports = {
         console.log(err);
         return callback(err, null)
       }
-      return callback(null, true); //error 안뜨면 성공이니 트루 전달.
-    //   return data
+      console.log(2323, data);
+      let query_tow = "SELECT * FROM `all`.Board as b ORDER BY origin_board_idx DESC LIMIT 1"
+      db.dbConnection.query(query_tow, (err, data) => {
+        if (err) { return callback(err, null) }
+        console.log("create : ", data);
+        return callback(null, data);
+      })
     })
   },
 
