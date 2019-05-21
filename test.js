@@ -14,24 +14,29 @@ let testText = {
 };
 
 let testObj = {
-  method: "POST",
-  body: JSON.stringify(testText),
+  method: "GET",
+  // body: JSON.stringify({
+  //   origin_board_idx : 4
+  // }),
   headers: {
-    "Content-Type": "application/json"
+    "Content-Type": "application/json",
+    "info": JSON.stringify({
+      nickname : "nosh"
+    })
   }
 };
 // "http://15.164.93.48:9089/login"
 var myInit = {
-  method: 'GET',
+  method: 'DELETE',
+  body: JSON.stringify({
+    origin_board_idx: 1,
+    origin_user_idx: 1
+  }),
   headers: {
-    "Content-Type": "application/json",
-    "info": JSON.stringify({
-      email: "noh@gmail.com",
-      pw: "noh"
-    })
+    "Content-Type": "application/json"
   }
 }
-fetch("http://localhost:9089/user_board", testObj)
+fetch("http://localhost:9089/user_board", myInit)
   .then(res => res.json())
   .then(json => console.log(json));
 
