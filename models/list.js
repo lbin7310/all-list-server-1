@@ -27,7 +27,7 @@ module.exports = {
 
   delete: (origin_list_idx, callback) => {
     // 사용자가 리스트를 삭제할 때
-    let query = "delete l,c from `all`.List as l inner join `all`.Card as c on l.origin_list_idx = c.list_idx " +
+    let query = "delete l,c from `all`.List as l left join `all`.Card as c on l.origin_list_idx = c.list_idx " +
     "where l.origin_list_idx=?"
     db.dbConnection.query(query, [origin_list_idx], (err, data) => {
       if (err) { return console.log(err) };
