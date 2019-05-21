@@ -16,8 +16,8 @@ module.exports = {
     // console.log(token);
     // res.send(JSON.stringify(token));
     // res.cookie("d", '1').send(JSON.stringify(true));
-
-    models.login(req.body, (err, data) => {
+    // console.log(JSON.parse(req.headers.info))
+    models.login(JSON.parse(req.headers.info), (err, data) => {
       if (err) { console.log(err) }
       if (data) {
         res.send(JSON.stringify({

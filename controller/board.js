@@ -3,14 +3,16 @@ const models = require('../models/board');
 
 module.exports = {
 
-  lender: (req, res) => { // 로그인시 모든 것을 보내는 컨트롤러 
-    
+  lender: (req, res) => { // 로그인시 모든 것을 보내는 컨트롤러
+    console.log("render");
+    console.log(req.headers);
   },
 
   get: (req, res) => {
-    console.log("board get ", req.body.origin_board_idx);
+    console.log("board get ", req.headers.info);
     //req.body === origin_board_idx 값
-    models.get(req.body.origin_board_idx, (err, data) => {
+    let origin_board_idx = JSON.parse(req.headers.info).origin_board_idx;
+    models.get(origin_board_idx, (err, data) => {
       if (err) { return JSON.stringify("뭔가 잘못했어요") }
       res.send(data);
     })
