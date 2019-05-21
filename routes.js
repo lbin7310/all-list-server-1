@@ -1,12 +1,15 @@
 const router = require('express').Router();
 // req는 client에서 받는 것
 // res는 client로 줄 것
-
+// const jwt = require('jsonwebtoken');
 //test
-router.get('/', (req, res) => {
-  console.log("test get 요청옴");
-  res.send(JSON.stringify('test get success'));
-})
+// router.get('/', (req, res) => {
+//   console.log("test get 요청옴");
+//   const header = { "alg": "HS256", "typ": "JWT" }
+//   const encodedHeader = Buffer.from(JSON.stringify(header)).toString('base64')
+//   console.log(23, encodedHeader)
+//   res.send(JSON.stringify('test get success'));
+// })
 
 // user
 const user = require('./controller/user');
