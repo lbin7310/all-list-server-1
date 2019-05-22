@@ -1,27 +1,27 @@
 // 라우터에서 user를 타고 들어와 응답을 받고 돌려주는 곳
 const models = require('../models/user') // mysql 데이터를 관리하는 곳
-// const jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
+const secret = require('../secrete');
 
 module.exports = {
   login: (req, res) => {
     console.log("user login");
-    // console.log(req.body)
-    // console.log("쿠키 : ", req.cookies)
-    // console.log("login controller");
-    // let token = jwt.sign({
-    //   idx: 1
-    // },
-    // "apple"
-    // )
-    // console.log(token);
-    // res.send(JSON.stringify(token));
-    // res.cookie("d", '1').send(JSON.stringify(true));
     console.log(JSON.parse(req.headers.info))
     models.login(JSON.parse(req.headers.info), (err, data) => {
       if (err) { console.log(err) }
       if (data) {
+        let {origin_user_idx, email, password, nickname } = data[0];
+        // console.log("gg = ", data[0]);
+        let token = jwt.sign({
+          email: email,
+          password: password
+        }, secret.secret);
         res.send(JSON.stringify({
-          data: data,
+          token: token,
+          data: [{
+            origin_user_idx: origin_user_idx,
+            nickname: nickname
+          }],
           success: true
         }))
       } else {
