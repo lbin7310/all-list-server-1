@@ -43,8 +43,8 @@ router.delete('/card', card.delete);
 //user_board
 const user_board = require('./controller/user_board');
 router.post('/user_board', user_board.create);
-router.get('/user_board/find', user_board.find);
-router.get('/user_board/search', user_board.search);
+router.post('/user_board/find', user_board.find);
+router.post('/user_board/search', user_board.search);
 router.delete('/user_board', user_board.delete);
 
 module.exports = router;

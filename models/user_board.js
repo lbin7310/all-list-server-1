@@ -25,6 +25,7 @@ module.exports = {
 
   search: (data, callback) => {
     //닉네임으로 추가할 팀원을 찾을 때
+    // console.log(data)
     let nick = data.nickname;
     console.log(nick)
     let query = "select * from `all`.Users where nickname = ?";
