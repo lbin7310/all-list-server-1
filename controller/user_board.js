@@ -14,7 +14,7 @@ module.exports = {
   find: (req, res) => {
     //팀보드에 속해있는 사용자 목록 찾을 때
     // console.log(JSON.parse(req.headers.info))
-    models.find(JSON.parse(req.headers.info), (err, data) => {
+    models.find(req.body, (err, data) => {
       if (err) { res.send(err) };
       res.send(JSON.stringify(data));
     })
@@ -22,7 +22,8 @@ module.exports = {
 
   search: (req, res) => {
     //닉네임으로 추가할 팀원을 찾을 때
-    models.search(JSON.parse(req.headers.info), (err, data) => {
+    // console.log(req.body)
+    models.search(req.body, (err, data) => {
       if (err) { res.send(err) };
       res.send(JSON.stringify(data));
     })
