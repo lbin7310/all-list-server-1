@@ -4,7 +4,6 @@ module.exports = {
 
   create: (req, res) => {
     //사용자가 만든 보드들 모으는 곳
-    console.log(req.body);
     models.create(req.body, (err, data) => {
       if (err) { res.send(err) };
       res.send(true);
@@ -13,7 +12,6 @@ module.exports = {
 
   find: (req, res) => {
     //팀보드에 속해있는 사용자 목록 찾을 때
-    // console.log(JSON.parse(req.headers.info))
     models.find(req.body, (err, data) => {
       if (err) { res.send(err) };
       res.send(JSON.stringify(data));
@@ -22,7 +20,6 @@ module.exports = {
 
   search: (req, res) => {
     //닉네임으로 추가할 팀원을 찾을 때
-    // console.log(req.body)
     models.search(req.body, (err, data) => {
       if (err) { res.send(err) };
       res.send(JSON.stringify(data));
@@ -31,7 +28,6 @@ module.exports = {
 
   delete: (req, res) => {
     //닉네임으로 추가할 팀원을 찾을 때
-    // console.log(req.body)
     models.delete(req.body, (err, data) => {
       if (err) { res.send(err) };
       res.send(data);

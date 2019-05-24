@@ -19,7 +19,6 @@ module.exports = {
   },
 
   signup: (data, callback) => { //회원가입시
-    console.log("회원가입 쿼리 넘어옴")
     let email = data.email;
     let pw = crypto.createHash('sha512').update(data.pw).digest('base64'); // 비밀번호를 해싱처리 함
     let nickname = data.nickname;
@@ -28,7 +27,6 @@ module.exports = {
     db.dbConnection.query(insertUser, [email, pw, nickname], (err, data) => {
       if (err) { return callback(err, false) };
     })
-    // console.log("email = ", email, " / pw = ", pw, " / nickname = ", nickname)
     return callback(null, true);
   },
 
@@ -39,7 +37,6 @@ module.exports = {
     let searchEm = "SELECT `email` FROM `all`.`Users` where email = ?"
     db.dbConnection.query(searchEm, [email], (err, data) => {
       console.log(2, err)
-      // if (err) { callback(err, null) }
       if (data.length === 0) { return callback(null, true) }; // 중복없을 때
       return callback(null, false); // 중복일 때
     })
@@ -56,6 +53,4 @@ module.exports = {
       return callback(null, false); // 중복일 때
     })
   }
-  // update: (req, res) => { //회원정보수정시
-  // }
 }

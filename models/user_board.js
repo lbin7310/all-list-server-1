@@ -4,7 +4,6 @@ module.exports = {
 
   create: (data, callback) => {
   // 팀원추가 및 사용자들이 만든 보드 정보 모아놓는 곳
-    console.log("userboard = ", data);
     let {origin_board_idx, origin_user_idx} = data
     let query = "INSERT INTO `all`.`User_Board` (`user_idx`, `board_idx`) VALUES (?, ?)";
     db.dbConnection.query(query, [origin_user_idx, origin_board_idx], (err, data) => {
@@ -25,9 +24,7 @@ module.exports = {
 
   search: (data, callback) => {
     //닉네임으로 추가할 팀원을 찾을 때
-    // console.log(data)
     let nick = data.nickname;
-    console.log(nick)
     let query = "select * from `all`.Users where nickname = ?";
     db.dbConnection.query(query, [nick], (err, data) => {
       if (err) { return callback(err, null) };
@@ -38,7 +35,6 @@ module.exports = {
   delete: (data, callback) => {
     //닉네임으로 추가할 팀원을 찾을 때
     let {origin_board_idx , origin_user_idx } = data;
-    console.log(origin_board_idx, origin_user_idx);
     let query = "delete from `all`.User_Board where user_idx =? and board_idx = ?";
     db.dbConnection.query(query, [origin_user_idx, origin_board_idx], (err, data) => {
       if (err) { return callback(err, null) };

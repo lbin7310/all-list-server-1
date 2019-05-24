@@ -1,10 +1,8 @@
 const models = require('../models/board');
-// const iconv = require('iconv-lite'); // 클라에서 넘겨준 한글 깨짐 현상을 처리하기
 
 module.exports = {
 
   lender: (req, res) => { // 로그인시 모든 것을 보내는 컨트롤러
-    console.log("lender 컴포넌트");
     models.lender(JSON.parse(req.headers.info).origin_user_idx, (err, data) => {
       if (err) { res.send(err) };
       res.send(JSON.stringify(data));
@@ -12,22 +10,14 @@ module.exports = {
   },
 
   get: (req, res) => {
-    console.log("board get ", req.headers.info);
-    //req.body === origin_board_idx 값
     let origin_board_idx = JSON.parse(req.headers.info).origin_board_idx;
     models.get(origin_board_idx, (err, data) => {
       if (err) { return JSON.stringify("뭔가 잘못했어요") }
       res.send(data);
     })
-
-    // console.log(paser)
-    // let QueryData = req.body.userinfo.userStorage;
-    // console.log("board get ", QueryData)
   },
 
   create: (req, res) => { // 보드 만드는 sql로 넘겨주기
-    // console.log(iconv.decode(req.body.title, 'EUC-KR').toString());
-    console.log(req.body);
     let QueryData = {
       board_title: req.body.board_title,
       is_private: req.body.is_private,
@@ -42,7 +32,6 @@ module.exports = {
 
   update: (req, res) => { // 보드 수정
     // 클라쪽에서 받아야할 데이터
-    console.log("보드 수정 콘드롤러")
     models.update(req.body, (err, data) => {
       if (err) { throw err };
       res.send(data)
@@ -50,8 +39,6 @@ module.exports = {
   },
 
   delete: (req, res) => {
-    console.log("보드 삭제");
-    // console.log(req.body);
     models.delete(req.body, (err, data) => {
       if (err) { throw err };
       res.send(data);
